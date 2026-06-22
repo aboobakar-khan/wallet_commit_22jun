@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 /// Type system (see design/THESIS.md):
 ///   - Newsreader (soft editorial serif) for prayer names & lines of meaning.
@@ -7,29 +6,26 @@ import 'package:google_fonts/google_fonts.dart';
 ///   - Tabular figures for money so amounts don't shimmer when they change.
 ///   - Amiri (Naskh) for Arabic spiritual phrases, shaped + RTL.
 ///
-/// Scale (sp): Display 32 / Title 24 / Headline 19 / Body 16 / Label 14 / Caption 12.
+/// All three are bundled as assets (see pubspec) — no runtime fetch. Newsreader
+/// and Hanken Grotesk are variable fonts; Flutter maps [TextStyle.fontWeight] to
+/// the `wght` axis automatically.
 ///
-/// The base [TextTheme] covers body/label/title chrome; the ceremonial serif,
-/// money, and Arabic styles live on [AppText] so they read as intentional,
-/// reserved registers rather than ambient defaults.
+/// Scale (sp): Display 32 / Title 24 / Headline 19 / Body 16 / Label 14 / Caption 12.
+abstract final class FontFamilies {
+  static const serif = 'Newsreader';
+  static const sans = 'Hanken Grotesk';
+  static const arabic = 'Amiri';
+}
+
+/// The ceremonial serif, money, and Arabic styles live on [AppText] so they read
+/// as intentional, reserved registers rather than ambient defaults.
 @immutable
 class AppText extends ThemeExtension<AppText> {
-  /// Large ceremonial serif — onboarding lines, the commitment summary line.
   final TextStyle serifDisplay;
-
-  /// Section-scale serif — screen titles that should feel editorial.
   final TextStyle serifTitle;
-
-  /// Prayer names on the Arc and detail (Fajr, Dhuhr…), serif, quiet weight.
   final TextStyle prayerName;
-
-  /// Money — tabular figures, calm weight. Never louder than the prayer.
   final TextStyle money;
-
-  /// Money at hero scale (rare — wallet balance), still calm.
   final TextStyle moneyLarge;
-
-  /// Arabic spiritual phrases.
   final TextStyle arabic;
 
   const AppText({
@@ -43,34 +39,39 @@ class AppText extends ThemeExtension<AppText> {
 
   static AppText build({required Color ink, required Color inkMuted}) {
     return AppText(
-      serifDisplay: GoogleFonts.newsreader(
+      serifDisplay: TextStyle(
+        fontFamily: FontFamilies.serif,
         fontSize: 32,
         height: 1.18,
         fontWeight: FontWeight.w400,
         letterSpacing: -0.2,
         color: ink,
       ),
-      serifTitle: GoogleFonts.newsreader(
+      serifTitle: TextStyle(
+        fontFamily: FontFamilies.serif,
         fontSize: 24,
         height: 1.22,
         fontWeight: FontWeight.w500,
         letterSpacing: -0.1,
         color: ink,
       ),
-      prayerName: GoogleFonts.newsreader(
+      prayerName: TextStyle(
+        fontFamily: FontFamilies.serif,
         fontSize: 19,
         height: 1.1,
         fontWeight: FontWeight.w500,
         color: ink,
       ),
-      money: GoogleFonts.hankenGrotesk(
+      money: TextStyle(
+        fontFamily: FontFamilies.sans,
         fontSize: 16,
         height: 1.1,
         fontWeight: FontWeight.w500,
         color: ink,
         fontFeatures: const [FontFeature.tabularFigures()],
       ),
-      moneyLarge: GoogleFonts.hankenGrotesk(
+      moneyLarge: TextStyle(
+        fontFamily: FontFamilies.sans,
         fontSize: 32,
         height: 1.05,
         fontWeight: FontWeight.w500,
@@ -78,7 +79,8 @@ class AppText extends ThemeExtension<AppText> {
         color: ink,
         fontFeatures: const [FontFeature.tabularFigures()],
       ),
-      arabic: GoogleFonts.amiri(
+      arabic: TextStyle(
+        fontFamily: FontFamilies.arabic,
         fontSize: 22,
         height: 1.6,
         fontWeight: FontWeight.w400,
@@ -124,7 +126,8 @@ class AppText extends ThemeExtension<AppText> {
 TextTheme buildTextTheme({required Color ink, required Color inkMuted}) {
   TextStyle sans(double size, FontWeight weight,
       {double height = 1.35, double spacing = 0, Color? color}) {
-    return GoogleFonts.hankenGrotesk(
+    return TextStyle(
+      fontFamily: FontFamilies.sans,
       fontSize: size,
       height: height,
       fontWeight: weight,
@@ -134,7 +137,6 @@ TextTheme buildTextTheme({required Color ink, required Color inkMuted}) {
   }
 
   return TextTheme(
-    // Display reserved for the serif register; keep a sans fallback subtle.
     displayLarge: sans(32, FontWeight.w600, height: 1.1, spacing: -0.4),
     titleLarge: sans(24, FontWeight.w600, height: 1.2, spacing: -0.2),
     titleMedium: sans(19, FontWeight.w600, height: 1.25), // Headline

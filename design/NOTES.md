@@ -72,9 +72,11 @@ A running record of what was tried, what was cut, and the self-critique against
 
 ## Known gaps / next steps (honest)
 
-- **Fonts fetch at runtime** via `google_fonts` (needs network on first launch;
-  falls back to system fonts offline). For production, bundle Newsreader / Hanken
-  Grotesk / Amiri as assets and drop the runtime fetch.
+- ~~Fonts fetch at runtime via `google_fonts`.~~ **Resolved:** Newsreader, Hanken
+  Grotesk, and Amiri are now bundled as assets (`assets/fonts/`) and the
+  `google_fonts` dependency is removed — the type system renders reliably offline.
+  Newsreader/Hanken are variable fonts; Flutter maps `fontWeight` to the `wght`
+  axis. Confirmed present in the web build's `FontManifest.json`.
 - **RTL is wired** (locale `ar` → MaterialApp RTL; Arabic via Amiri + forced RTL in
   `ArabicPhrase`) but a full right-to-left visual audit needs a device.
 - **No on-device 60/120fps capture yet** — the Arc is wrapped in `RepaintBoundary`,
@@ -88,3 +90,5 @@ A running record of what was tried, what was cut, and the self-critique against
 - `flutter test` — 3 widget smoke tests pass: boots into active Today, fresh user
   → onboarding, depleted wallet → calm top-up prompt. The full widget tree compiles
   (the test imports the whole app).
+- `flutter build web` — the entire app compiles via dart2js (~62s) and the three
+  bundled fonts register in `FontManifest.json`.

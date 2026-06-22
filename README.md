@@ -17,12 +17,13 @@ You need the Flutter SDK (3.44+, Dart 3.12+) and a device or emulator.
 
 ```bash
 flutter pub get
-flutter run
+flutter run                 # on a device/emulator
+# or, for a quick desktop preview:
+flutter run -d chrome
 ```
 
-First launch fetches the fonts (Newsreader, Hanken Grotesk, Amiri) over the
-network via `google_fonts`; offline it falls back to system fonts. For production
-these should be bundled as assets.
+Fonts (Newsreader, Hanken Grotesk, Amiri) are **bundled as assets** — no network
+fetch, renders correctly offline.
 
 ### Seeing every state — the dev panel
 
@@ -60,8 +61,9 @@ design/         THESIS.md (the point of view) · NOTES.md (build log & critique)
 ## Verify
 
 ```bash
-flutter analyze   # clean
-flutter test      # boots active Today · fresh→onboarding · depleted→top-up
+flutter analyze     # clean
+flutter test        # boots active Today · fresh→onboarding · depleted→top-up
+flutter build web   # full app compiles; fonts bundle into the asset manifest
 ```
 
 See `design/THESIS.md` for the design rationale and `design/NOTES.md` for the

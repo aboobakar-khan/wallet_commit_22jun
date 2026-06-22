@@ -35,7 +35,6 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.8
   flutter_riverpod: ^3.3.2
-  google_fonts: ^8.1.0
   intl: ^0.20.2
   flutter_localizations:
     sdk: flutter
@@ -61,6 +60,21 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+
+  # Fonts bundled as assets (no runtime fetch) so the type system renders
+  # reliably, including offline. Newsreader and Hanken Grotesk are variable
+  # fonts — Flutter maps fontWeight to the `wght` axis automatically.
+  fonts:
+    - family: Newsreader
+      fonts:
+        - asset: assets/fonts/Newsreader.ttf
+    - family: Hanken Grotesk
+      fonts:
+        - asset: assets/fonts/HankenGrotesk.ttf
+    - family: Amiri
+      fonts:
+        - asset: assets/fonts/Amiri-Regular.ttf
+
 
   # To add assets to your application, add an assets section, like this:
   # assets:

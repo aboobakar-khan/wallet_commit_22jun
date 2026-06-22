@@ -1,7 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 import 'package:sukoon/application/providers.dart';
 import 'package:sukoon/data/mock/dev_scenario.dart';
@@ -18,11 +17,6 @@ Widget _app(DevScenario scenario) => ProviderScope(
     );
 
 void main() {
-  setUpAll(() {
-    // No network in tests — fall back to default glyphs instead of fetching.
-    GoogleFonts.config.allowRuntimeFetching = false;
-  });
-
   testWidgets('boots into the active commitment (Today)', (tester) async {
     await tester.pumpWidget(_app(DevScenario.active));
     await tester.pump(); // settle the auth stream

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 import '../../../core/motion/motion.dart';
 import '../../../domain/domain.dart';
@@ -135,11 +134,12 @@ class DayArc extends StatelessWidget {
               Text(
                 entry.prayer.displayName,
                 textAlign: TextAlign.center,
-                style: GoogleFonts.newsreader(
+                style: const TextStyle(
+                  fontFamily: 'Newsreader',
                   fontSize: 13,
                   fontWeight: FontWeight.w500,
-                  color: const Color(0xFFF4EFE6),
-                  shadows: const [Shadow(color: Color(0xCC04101A), blurRadius: 6)],
+                  color: Color(0xFFF4EFE6),
+                  shadows: [Shadow(color: Color(0xCC04101A), blurRadius: 6)],
                 ),
               ),
               if (caption != null)
