@@ -50,7 +50,7 @@ Widget _topBar(BuildContext context, WidgetRef ref, {required bool overSky}) {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'As-salāmu ʿalaykum',
+              'As-salāmu alaykum',
               style: context.type.labelMedium?.copyWith(
                 color: overSky ? const Color(0xFFE7E0D2) : colors.inkMuted,
                 shadows: shadows,

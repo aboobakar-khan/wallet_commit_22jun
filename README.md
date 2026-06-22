@@ -11,6 +11,21 @@ commitment.
 > SDK yet — the app is fully clickable on seeded fixtures, architected so the real
 > backend drops in behind unchanged repository interfaces.
 
+## Screens
+
+Rendered from the app with the bundled fonts (`flutter test test/screenshots.dart
+--update-goldens`). `₹` and a couple of diacritics show as boxes in these renders
+because the offline golden harness has no system-font fallback — they render
+normally on a real device.
+
+| Today (Sahar / light) | Today (Layl / dark) | Giving |
+|---|---|---|
+| ![](screenshots/01_today_light.png) | ![](screenshots/06_today_dark.png) | ![](screenshots/03_giving.png) |
+
+| Wallet & ledger | History (grid of light) | Onboarding |
+|---|---|---|
+| ![](screenshots/02_wallet.png) | ![](screenshots/04_history.png) | ![](screenshots/07_onboarding.png) |
+
 ## Run it
 
 You need the Flutter SDK (3.44+, Dart 3.12+) and a device or emulator.
